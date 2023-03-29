@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import sj.taqback.domain.User;
 import sj.taqback.repository.UserRepository;
 
-import java.time.LocalDateTime;
-
 @SpringBootTest
 @Transactional
 public class UserServiceTest {
@@ -29,5 +27,17 @@ public class UserServiceTest {
         User foundUserByNickname = userService.findByNickname("sj").get();
         Assertions.assertThat(user.getNickname()).isEqualTo(foundUserByAccountId.getNickname());
         Assertions.assertThat(user.getAccountId()).isEqualTo(foundUserByNickname.getAccountId());
+    }
+
+    @Test
+    void duplicatedAccountId() {
+        User exists = new User();
+        exists.setAccountId("bnac");
+        userService.createAccount(exists);
+
+        User user = new User();
+        user.setAccountId("bnac");
+        Assertions.assertThatThrownBy(() -> userService.createAccount(user))
+                .isInstanceOf(IllegalStateException.class);
     }
 }
