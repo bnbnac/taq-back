@@ -17,9 +17,16 @@ public class UserService {
     }
 
     public Long createAccount(User user) {
+        checkAccountIdDuplicated(user);
         userRepository.save(user);
-
         return user.getId();
+    }
+
+    private void checkAccountIdDuplicated(User user) {
+        userRepository.findByAccountId(user.getAccountId())
+                .ifPresent(u -> {
+                    throw new IllegalStateException("이미 사용중인 아이디입니다.");
+                });
     }
 
     public Optional<User> findByAccountId(String accountId) {
