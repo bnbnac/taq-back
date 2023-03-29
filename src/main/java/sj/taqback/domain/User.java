@@ -10,16 +10,14 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "account_id")
     private String accountId;
 
-    @Column
     private String password;
 
-    @Column
     private String nickname;
 
-    @Column
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public Long getId() {
