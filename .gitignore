@@ -26,6 +26,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 /src/main/resources/application-db.properties
+/src/main/resources/*.json
 
 ### NetBeans ###
 /nbproject/private/
