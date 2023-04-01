@@ -19,12 +19,13 @@ public class UserServiceTest {
     @Test
     void createAccountAndFindUser() {
         User user = new User();
-        user.setAccountId("bnac");
-        user.setNickname("sj");
-
+        user.setAccountId("acid");
+        user.setNickname("nick");
+        user.setPassword("pswd");
         userService.createAccount(user);
-        User foundUserByAccountId = userService.findByAccountId("bnac").get();
-        User foundUserByNickname = userService.findByNickname("sj").get();
+
+        User foundUserByAccountId = userService.findByAccountId("acid").get();
+        User foundUserByNickname = userService.findByNickname("nick").get();
         Assertions.assertThat(user.getNickname()).isEqualTo(foundUserByAccountId.getNickname());
         Assertions.assertThat(user.getAccountId()).isEqualTo(foundUserByNickname.getAccountId());
     }
@@ -33,11 +34,28 @@ public class UserServiceTest {
     void duplicatedAccountId() {
         User exists = new User();
         exists.setAccountId("bnac");
+        exists.setPassword("p");
         userService.createAccount(exists);
 
         User user = new User();
         user.setAccountId("bnac");
+        user.setPassword("p");
         Assertions.assertThatThrownBy(() -> userService.createAccount(user))
                 .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void storeUserPasswordEncoded() {
+        User user = new User();
+        String password = "pswd";
+        user.setAccountId("acid");
+        user.setPassword(password);
+
+        String userPassword = user.getPassword();
+
+        userService.createAccount(user);
+        String repositoryPassword = userService.findByAccountId("acid").get().getPassword();
+        System.out.println(repositoryPassword);
+        Assertions.assertThat(password).isNotEqualTo(repositoryPassword);
     }
 }
