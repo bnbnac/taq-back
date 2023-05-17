@@ -1,9 +1,10 @@
 package sj.taqback.controller;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import sj.taqback.domain.User;
 import sj.taqback.service.UserService;
 
@@ -19,11 +20,11 @@ public class SignupController {
 
     @GetMapping("/users/new")
     public String createAccountForm(User user) {
-        return "signupForm";
+        return "users/signupForm";
     }
 
-    @PostMapping("/users/new")
-    public String createAccount(SignupForm form) {
+    @PostMapping(value = "/users/new", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String createAccount(@RequestBody SignupForm form) {
         User user = new User();
 
         user.setAccountId(form.getAccountId());
