@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class JpaUserRepository implements UserRepository {
+public class UserRepositoryJpa implements UserRepository {
     private final EntityManager em;
 
-    public JpaUserRepository(EntityManager em) {
+    public UserRepositoryJpa(EntityManager em) {
         this.em = em;
     }
 

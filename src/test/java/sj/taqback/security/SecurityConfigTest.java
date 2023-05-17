@@ -10,7 +10,10 @@ public class SecurityConfigTest {
 
     @Test
     void createBCryptPasswordEncoder() {
-        BCryptStrengthConfig.findStrength(4, MAX_STRENGTH_SUPPORTED_BCRYPT_PASSWORD_ENCODER);
+        Assertions.assertThat(BCryptStrengthConfig
+                .findStrength(4, MAX_STRENGTH_SUPPORTED_BCRYPT_PASSWORD_ENCODER))
+                .isInstanceOf(Integer.class);
+
     }
 
     @Test
