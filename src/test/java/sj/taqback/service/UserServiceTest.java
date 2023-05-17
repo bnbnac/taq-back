@@ -55,7 +55,6 @@ public class UserServiceTest {
 
         userService.createAccount(user);
         String repositoryPassword = userService.findByAccountId("acid").get().getPassword();
-        System.out.println(repositoryPassword);
         Assertions.assertThat(password).isNotEqualTo(repositoryPassword);
     }
 }
