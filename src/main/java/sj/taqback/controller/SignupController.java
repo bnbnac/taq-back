@@ -18,11 +18,6 @@ public class SignupController {
         this.userService = userService;
     }
 
-    @GetMapping("/users/new")
-    public String createAccountForm(User user) {
-        return "users/signupForm";
-    }
-
     @PostMapping(value = "/users/new", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String createAccount(@RequestBody SignupForm form) {
         User user = new User();
@@ -32,7 +27,6 @@ public class SignupController {
         user.setNickname(form.getNickname());
         user.setCreatedAt(LocalDateTime.now());
 
-        userService.createAccount(user);
-        return "redirect:/";
+        return Long.toString(userService.createAccount(user));
     }
 }
