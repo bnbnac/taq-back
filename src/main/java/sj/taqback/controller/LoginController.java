@@ -1,10 +1,11 @@
 package sj.taqback.controller;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import sj.taqback.dto.LoginDto;
 import sj.taqback.service.LoginService;
+
 
 @Controller
 public class LoginController {
@@ -14,8 +15,8 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String Login(@RequestBody LoginForm form) {
-        return loginService.login(form);
+    @PostMapping(value = "/login")
+    public String login(@RequestBody LoginDto loginDto) {
+        return loginService.login(loginDto);
     }
 }

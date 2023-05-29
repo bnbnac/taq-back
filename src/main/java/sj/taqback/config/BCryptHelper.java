@@ -2,7 +2,7 @@ package sj.taqback.config;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class BCryptStrengthConfig {
+public class BCryptHelper {
     public static int findStrength(int minStrength, int limitStrength) {
         int strength = minStrength - 1;
         long timeTaken = 0;

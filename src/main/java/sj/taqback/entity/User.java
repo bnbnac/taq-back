@@ -1,4 +1,4 @@
-package sj.taqback.domain;
+package sj.taqback.entity;
 
 import jakarta.persistence.*;
 

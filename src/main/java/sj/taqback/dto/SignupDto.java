@@ -1,6 +1,10 @@
-package sj.taqback.controller;
+package sj.taqback.dto;
 
-public class SignupForm {
+import sj.taqback.entity.User;
+
+import java.time.LocalDateTime;
+
+public class SignupDto {
     private String accountId;
     private String password;
     private String nickname;
@@ -27,5 +31,15 @@ public class SignupForm {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public User toEntity() {
+        User user = new User();
+
+        user.setAccountId(accountId);
+        user.setPassword(password);
+        user.setNickname(nickname);
+
+        return user;
     }
 }

@@ -3,9 +3,10 @@ package sj.taqback.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sj.taqback.domain.User;
+import sj.taqback.entity.User;
 import sj.taqback.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -22,13 +23,14 @@ public class UserService {
     public Long createAccount(User user) {
         checkAccountIdDuplicated(user);
 
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        user.setCreatedAt(LocalDateTime.now());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userRepository.save(user);
         return user.getId();
     }
 
-    private void checkAccountIdDuplicated(User user) {
+    public void checkAccountIdDuplicated(User user) {
         userRepository.findByAccountId(user.getAccountId())
                 .ifPresent(u -> {
                     throw new IllegalStateException("이미 사용중인 아이디입니다.");

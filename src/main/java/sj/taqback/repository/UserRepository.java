@@ -1,6 +1,6 @@
 package sj.taqback.repository;
 
-import sj.taqback.domain.User;
+import sj.taqback.entity.User;
 
 import java.util.Optional;
 

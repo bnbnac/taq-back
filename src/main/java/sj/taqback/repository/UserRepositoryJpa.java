@@ -2,7 +2,7 @@ package sj.taqback.repository;
 
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
-import sj.taqback.domain.User;
+import sj.taqback.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +10,6 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryJpa implements UserRepository {
     private final EntityManager em;
-
     public UserRepositoryJpa(EntityManager em) {
         this.em = em;
     }

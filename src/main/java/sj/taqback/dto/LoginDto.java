@@ -1,6 +1,6 @@
-package sj.taqback.controller;
+package sj.taqback.dto;
 
-public class LoginForm {
+public class LoginDto {
     private String accountId;
     private String password;
 

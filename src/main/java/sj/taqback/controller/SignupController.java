@@ -1,14 +1,13 @@
 package sj.taqback.controller;
 
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import sj.taqback.domain.User;
+import sj.taqback.dto.SignupDto;
 import sj.taqback.service.UserService;
 
-import java.time.LocalDateTime;
 
 @Controller
 public class SignupController {
@@ -18,15 +17,10 @@ public class SignupController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/users/new", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String createAccount(@RequestBody SignupForm form) {
-        User user = new User();
+    @PostMapping(value = "/users/new")
+    public ResponseEntity<Long> createAccount(@RequestBody SignupDto signupDto) {
+        Long id = userService.createAccount(signupDto.toEntity());
 
-        user.setAccountId(form.getAccountId());
-        user.setPassword(form.getPassword());
-        user.setNickname(form.getNickname());
-        user.setCreatedAt(LocalDateTime.now());
-
-        return Long.toString(userService.createAccount(user));
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

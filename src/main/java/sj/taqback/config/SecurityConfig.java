@@ -16,6 +16,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(BCryptStrengthConfig.findStrength(MIN_STRENGTH, LIMIT_STRENGTH));
+        return new BCryptPasswordEncoder(BCryptHelper.findStrength(MIN_STRENGTH, LIMIT_STRENGTH));
     }
 }
