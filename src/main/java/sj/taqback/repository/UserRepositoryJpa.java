@@ -35,11 +35,8 @@ public class UserRepositoryJpa implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByNickname(String nickname) {
-        List<User> result = em.createQuery("select u from User u where u.nickname = :nickname", User.class)
-                .setParameter("nickname", nickname)
+    public List<User> findAll() {
+        return em.createQuery("select u from User u", User.class)
                 .getResultList();
-
-        return result.stream().findAny();
     }
 }

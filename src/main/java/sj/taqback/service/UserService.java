@@ -7,6 +7,7 @@ import sj.taqback.entity.User;
 import sj.taqback.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,15 +38,15 @@ public class UserService {
                 });
     }
 
-    public Optional<User> findById(Long id) {
+    public Optional<User> findOne(Long id) {
         return userRepository.findById(id);
     }
 
-    public Optional<User> findByAccountId(String accountId) {
+    public Optional<User> findOne(String accountId) {
         return userRepository.findByAccountId(accountId);
     }
 
-    public Optional<User> findByNickname(String nickname) {
-        return userRepository.findByNickname(nickname);
+    public List<User> findUsers() {
+        return userRepository.findAll();
     }
 }
